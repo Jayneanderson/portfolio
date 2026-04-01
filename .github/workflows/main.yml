@@ -1,0 +1,4 @@
+name: Deploy static content
+on:
+	push:
+		branches: [ main ]

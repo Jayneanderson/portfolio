@@ -1,68 +1,42 @@
-import { defineConfig, loadEnv } from "vite";
-import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
 import path from "path";
-import { cwd } from 'node:process';
+import { defineConfig } from "vite";
 
-export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, cwd(), "");
+const PORT = 3000;
 
-  const rawPort = env.PORT || 3000;
-
-  if (!rawPort) {
-    throw new Error(
-      "PORT environment variable is required but was not provided.",
-    );
-  }
-
-  const port = Number(rawPort);
-
-  if (Number.isNaN(port) || port <= 0) {
-    throw new Error(`Invalid PORT value: "${rawPort}"`);
-  }
-
-  const basePath = env.BASE_PATH;
-
-  if (!basePath) {
-    throw new Error(
-      "BASE_PATH environment variable is required but was not provided.",
-    );
-  }
-
-  return {
-    base: basePath,
-    mode,
-    plugins: [react(), tailwindcss(),],
-    resolve: {
-      alias: {
-        "@": path.resolve(import.meta.dirname, "src"),
-        "@assets": path.resolve(
-          import.meta.dirname,
-          "..",
-          "..",
-          "attached_assets",
-        ),
-      },
-      dedupe: ["react", "react-dom"],
+export default defineConfig({
+  base: "/",
+  plugins: [react(), tailwindcss()],
+  resolve: {
+    alias: {
+      "@": path.resolve(import.meta.dirname, "src"),
+      "@assets": path.resolve(
+        import.meta.dirname,
+        "..",
+        "..",
+        "attached_assets",
+      ),
     },
-    root: path.resolve(import.meta.dirname),
-    build: {
-      outDir: path.resolve(import.meta.dirname, "dist/public"),
-      emptyOutDir: true,
+    dedupe: ["react", "react-dom"],
+  },
+  root: path.resolve(import.meta.dirname),
+  build: {
+    outDir: path.resolve(import.meta.dirname, "dist/public"),
+    emptyOutDir: true,
+  },
+  server: {
+    port: PORT,
+    host: "0.0.0.0",
+    allowedHosts: true,
+    fs: {
+      strict: true,
+      deny: ["**/.*"],
     },
-    server: {
-      port,
-      host: "0.0.0.0",
-      allowedHosts: true,
-      fs: {
-        strict: true,
-        deny: ["**/.*"],
-      },
-    },
-    preview: {
-      port,
-      host: "0.0.0.0",
-      allowedHosts: true,
-    },
-  };
+  },
+  preview: {
+    port: PORT,
+    host: "0.0.0.0",
+    allowedHosts: true,
+  },
 });

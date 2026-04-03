@@ -6,7 +6,7 @@ import { defineConfig } from "vite";
 const PORT = 3000;
 
 export default defineConfig({
-  base: "/portfolio",
+  base: "/portfolio/",
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {

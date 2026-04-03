@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { ProjectCard } from "@/components/ProjectCard";
+import { ProjectCard } from "@/components/project-card";
 import { projects } from "@/data/projects";
 
 // --- Form Validation Schema ---

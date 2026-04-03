@@ -3,8 +3,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
-import Home from "@/pages/Home";
-import ProjectDetail from "@/pages/ProjectDetail";
+import Home from "@/pages/home";
+import ProjectDetail from "@/pages/project-details";
 
 const queryClient = new QueryClient();
 

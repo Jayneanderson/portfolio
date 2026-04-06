@@ -131,7 +131,7 @@ export const projects: Project[] = [
     tech: ["React", "TypeScript",],
     impact: "Aumento de alcance de empreendimentos de Cachoeira.",
     github: "#",
-    liveUrl: "",
+    liveUrl: "https://seu-pedacinho.jayneanderson.dev",
     images: [
       "../images/seu-pedacinho/seu_pedacinho_1.png",
       "../images/seu-pedacinho/seu_pedacinho_2.png",

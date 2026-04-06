@@ -45,11 +45,12 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: "Home", href: "#home" },
+    { name: "Inicio", href: "#home" },
     { name: "Sobre", href: "#sobre" },
     { name: "Projetos", href: "#projetos" },
     { name: "Stack", href: "#stack" },
     { name: "Contato", href: "#contato" },
+    { name: "Blog", href: "/blog" },
   ];
 
   return (

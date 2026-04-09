@@ -22,6 +22,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { ProjectCard } from "@/components/project-card";
 import { projects } from "@/data/projects";
+import { Link } from 'wouter';
 
 // --- Form Validation Schema ---
 const contactSchema = z.object({
@@ -62,23 +63,23 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <a
+        <Link
           href="#home"
           className="text-2xl font-display font-bold tracking-tighter hover:text-primary transition-colors"
         >
           Jayneanderson<span className="text-primary">_</span>
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.name}
               href={link.href}
               className="text-sm font-medium text-muted-foreground hover:text-white transition-colors"
             >
               {link.name}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -100,14 +101,14 @@ const Navbar = () => {
           className="absolute top-full left-0 w-full bg-card/95 backdrop-blur-xl border-b border-white/5 shadow-2xl py-6 px-6 flex flex-col gap-4 md:hidden"
         >
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.name}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
               className="text-lg font-medium text-foreground py-2 border-b border-white/5"
             >
               {link.name}
-            </a>
+            </Link>
           ))}
         </motion.div>
       )}
@@ -232,13 +233,13 @@ export default function Home() {
                   asChild
                   className="w-full sm:w-auto p-0 group"
                 >
-                  <a
+                  <Link
                     href="#projetos"
                     className="w-full h-12 flex items-center px-8"
                   >
                     Ver Projetos
                     <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </a>
+                  </Link>
                 </Button>
                 <Button
                   size="lg"
@@ -246,12 +247,12 @@ export default function Home() {
                   asChild
                   className="w-full sm:w-auto p-0"
                 >
-                  <a
+                  <Link
                     href="#contato"
                     className="w-full h-12 flex items-center px-8"
                   >
                     Entrar em contato
-                  </a>
+                  </Link>
                 </Button>
               </motion.div>
             </div>
@@ -325,14 +326,14 @@ export default function Home() {
                   asChild
                   className="rounded-full"
                 >
-                  <a
+                  <Link
                     href="https://br.linkedin.com/in/jayneandersonn"
                     target="_blank"
                     rel="noreferrer"
                     className="h-10 w-10 flex"
                   >
                     <Linkedin size={20} />
-                  </a>
+                  </Link>
                 </Button>
                 <Button
                   variant="outline"
@@ -340,14 +341,14 @@ export default function Home() {
                   asChild
                   className="rounded-full"
                 >
-                  <a
+                  <Link
                     href="mailto:jayneanderson@gmail.com"
                     target="_blank"
                     rel="noreferrer"
                     className="h-10 w-10"
                   >
                     <Mail size={20} />
-                  </a>
+                  </Link>
                 </Button>
                 <Button
                   variant="outline"
@@ -355,14 +356,14 @@ export default function Home() {
                   asChild
                   className="rounded-full"
                 >
-                  <a
+                  <Link
                     href="https://github.com/Jayneanderson"
                     target="_blank"
                     rel="noreferrer"
                     className="h-10 w-10"
                   >
                     <Github size={20} />
-                  </a>
+                  </Link>
                 </Button>
               </div>
             </motion.div>
@@ -590,7 +591,7 @@ export default function Home() {
                   Informações de contato
                 </h3>
                 <div className="flex items-center gap-4 flex-wrap">
-                  <a
+                  <Link
                     href="mailto:jayneanderson@gmail.com"
                     className="flex items-center gap-4 text-muted-foreground hover:text-primary transition-colors"
                   >
@@ -600,9 +601,9 @@ export default function Home() {
                     <span className="font-medium break-all">
                       jayneanderson@gmail.com
                     </span>
-                  </a>
+                  </Link>
 
-                  <a
+                  <Link
                     href="#"
                     className="flex items-center gap-4 text-muted-foreground hover:text-primary transition-colors"
                   >
@@ -610,7 +611,7 @@ export default function Home() {
                       <Linkedin size={20} />
                     </div>
                     <span className="font-medium">LinkedIn</span>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

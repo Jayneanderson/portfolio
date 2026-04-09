@@ -1,4 +1,4 @@
-import { useParams, useLocation } from "wouter";
+import { useParams, useLocation, Link } from "wouter";
 import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -52,12 +52,12 @@ export default function BlogPost() {
             />
             Blog
           </button>
-          <a
+          <Link
             href="/"
             className="text-lg font-display font-bold hover:text-primary transition-colors"
           >
             .JSantos<span className="text-primary">_</span>
-          </a>
+          </Link>
         </div>
       </header>
 

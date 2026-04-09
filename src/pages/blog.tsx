@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation } from "wouter";
+import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, Clock, Tag, Search } from "lucide-react";
 import { posts, readingTime, formatDate } from "@/data/posts";
@@ -26,16 +26,16 @@ export default function Blog() {
       {/* Minimal Navbar */}
       <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-white/5">
         <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
-          <a
+          <Link
             href="/"
             className="text-lg font-display font-bold hover:text-primary transition-colors"
           >
             .JSantos<span className="text-primary">_</span>
-          </a>
+          </Link>
           <nav className="flex items-center gap-6 text-sm text-muted-foreground">
-            <a href="/" className="hover:text-white transition-colors">
+            <Link href="/" className="hover:text-white transition-colors">
               Portfólio
-            </a>
+            </Link>
             <span className="text-foreground font-medium">Blog</span>
           </nav>
         </div>

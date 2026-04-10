@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft,
   BrainCircuit,
   CheckCircle2,
-  Github,
   ExternalLink,
   Zap,
   Lightbulb,
@@ -175,6 +174,10 @@ function ImageGallery({ images, projectName }: ImageGalleryProps) {
 }
 
 export default function ProjectDetail() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const params = useParams<{ slug: string }>();
   const [, navigate] = useLocation();
 
@@ -200,8 +203,8 @@ export default function ProjectDetail() {
       {/* Navbar minimal */}
       <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-white/5">
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <button
-            onClick={() => navigate("/#projetos")}
+          <Link
+            href="/#projetos"
             className="flex items-center gap-2 text-sm text-muted-foreground hover:text-white transition-colors cursor-pointer group"
           >
             <ArrowLeft
@@ -209,10 +212,10 @@ export default function ProjectDetail() {
               className="transition-transform group-hover:-translate-x-1"
             />
             Voltar aos projetos
-          </button>
-          <Link href="/" className="text-lg font-display font-bold">
-            .JSantos<span className="text-primary">_</span>
           </Link>
+          <a href="/" className="text-lg font-display font-bold">
+            .JSantos<span className="text-primary">_</span>
+          </a>
         </div>
       </header>
 
@@ -283,14 +286,14 @@ export default function ProjectDetail() {
             )}
             {project.liveUrl && (
               <Button asChild className="gap-2 px-0 py-0">
-                <Link
+                <a
                   href={project.liveUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="w-auto py-2 px-6 flex gap-2"
                 >
                   <ExternalLink size={16} /> Acessar sistema
-                </Link>
+                </a>
               </Button>
             )}
           </div>
@@ -430,11 +433,13 @@ export default function ProjectDetail() {
         >
           <Button
             variant="outline"
-            onClick={() => navigate("/#projetos")}
-            className="gap-2 cursor-pointer"
+            // onClick={() => navigate("/#projetos")}
+            className="cursor-pointer"
           >
-            <ArrowLeft size={16} />
-            Ver todos os projetos
+            <Link href="/#projetos" className="flex gap-2">
+              <ArrowLeft size={16} />
+              Ver todos os projetos
+            </Link>
           </Button>
         </motion.div>
       </main>

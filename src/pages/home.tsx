@@ -1,49 +1,26 @@
-import React, { useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import {
-  Terminal,
+  ArrowRight,
+  Code2,
   Database,
   Layout,
-  Wrench,
-  Github,
-  Linkedin,
-  ArrowRight,
   Mail,
-  Code2,
-  Target,
   Menu,
-  X,
+  Target,
+  Terminal,
   Users,
+  Wrench,
+  X,
 } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
+import React, { useEffect, useState } from "react";
 import { ProjectCard } from "@/components/project-card";
+import { Button } from "@/components/ui/button";
 import { projects } from "@/data/projects";
-import { Link } from 'wouter';
-
-// --- Form Validation Schema ---
-const contactSchema = z.object({
-  name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
-  email: z.string().email("E-mail inválido"),
-  message: z.string().min(10, "A mensagem deve ter pelo menos 10 caracteres"),
-});
-
-type ContactFormValues = z.infer<typeof contactSchema>;
-
-// --- Components ---
+import { Link } from "wouter";
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const navLinks = [
     { name: "Inicio", href: "#home" },
@@ -63,24 +40,34 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <Link
+        <a
           href="#home"
           className="text-2xl font-display font-bold tracking-tighter hover:text-primary transition-colors"
         >
           Jayneanderson<span className="text-primary">_</span>
-        </Link>
+        </a>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="text-sm font-medium text-muted-foreground hover:text-white transition-colors"
-            >
-              {link.name}
-            </Link>
-          ))}
+          {navLinks.map((link) =>
+            link.name === "Blog" ? (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-sm font-medium text-muted-foreground hover:text-white transition-colors"
+              >
+                {link.name}
+              </Link>
+            ) : (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-sm font-medium text-muted-foreground hover:text-white transition-colors"
+              >
+                {link.name}
+              </a>
+            ),
+          )}
         </nav>
 
         {/* Mobile Toggle */}
@@ -101,14 +88,14 @@ const Navbar = () => {
           className="absolute top-full left-0 w-full bg-card/95 backdrop-blur-xl border-b border-white/5 shadow-2xl py-6 px-6 flex flex-col gap-4 md:hidden"
         >
           {navLinks.map((link) => (
-            <Link
+            <a
               key={link.name}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
               className="text-lg font-medium text-foreground py-2 border-b border-white/5"
             >
               {link.name}
-            </Link>
+            </a>
           ))}
         </motion.div>
       )}
@@ -153,14 +140,22 @@ export default function Home() {
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-    reset,
-  } = useForm<ContactFormValues>({
-    resolver: zodResolver(contactSchema),
-  });
+  useEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    const hash = window.location.hash;
+
+    requestAnimationFrame(() => {
+      if (hash) {
+        const el = document.querySelector(hash);
+        el?.scrollIntoView({ behavior: "auto", block: "start" });
+      } else {
+        window.scrollTo(0, 0);
+      }
+    });
+  }, []);
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
@@ -233,13 +228,13 @@ export default function Home() {
                   asChild
                   className="w-full sm:w-auto p-0 group"
                 >
-                  <Link
+                  <a
                     href="#projetos"
                     className="w-full h-12 flex items-center px-8"
                   >
                     Ver Projetos
                     <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </Link>
+                  </a>
                 </Button>
                 <Button
                   size="lg"
@@ -247,12 +242,12 @@ export default function Home() {
                   asChild
                   className="w-full sm:w-auto p-0"
                 >
-                  <Link
+                  <a
                     href="#contato"
                     className="w-full h-12 flex items-center px-8"
                   >
                     Entrar em contato
-                  </Link>
+                  </a>
                 </Button>
               </motion.div>
             </div>
@@ -326,14 +321,29 @@ export default function Home() {
                   asChild
                   className="rounded-full"
                 >
-                  <Link
+                  <a
                     href="https://br.linkedin.com/in/jayneandersonn"
                     target="_blank"
                     rel="noreferrer"
                     className="h-10 w-10 flex"
                   >
-                    <Linkedin size={20} />
-                  </Link>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                      <rect width="4" height="12" x="2" y="9"></rect>
+                      <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                  </a>
                 </Button>
                 <Button
                   variant="outline"
@@ -341,14 +351,14 @@ export default function Home() {
                   asChild
                   className="rounded-full"
                 >
-                  <Link
+                  <a
                     href="mailto:jayneanderson@gmail.com"
                     target="_blank"
                     rel="noreferrer"
                     className="h-10 w-10"
                   >
                     <Mail size={20} />
-                  </Link>
+                  </a>
                 </Button>
                 <Button
                   variant="outline"
@@ -356,14 +366,28 @@ export default function Home() {
                   asChild
                   className="rounded-full"
                 >
-                  <Link
+                  <a
                     href="https://github.com/Jayneanderson"
                     target="_blank"
                     rel="noreferrer"
                     className="h-10 w-10"
                   >
-                    <Github size={20} />
-                  </Link>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+                      <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                    </svg>
+                  </a>
                 </Button>
               </div>
             </motion.div>
@@ -591,7 +615,7 @@ export default function Home() {
                   Informações de contato
                 </h3>
                 <div className="flex items-center gap-4 flex-wrap">
-                  <Link
+                  <a
                     href="mailto:jayneanderson@gmail.com"
                     className="flex items-center gap-4 text-muted-foreground hover:text-primary transition-colors"
                   >
@@ -601,17 +625,32 @@ export default function Home() {
                     <span className="font-medium break-all">
                       jayneanderson@gmail.com
                     </span>
-                  </Link>
+                  </a>
 
-                  <Link
+                  <a
                     href="#"
                     className="flex items-center gap-4 text-muted-foreground hover:text-primary transition-colors"
                   >
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0 text-primary">
-                      <Linkedin size={20} />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect width="4" height="12" x="2" y="9"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                      </svg>
                     </div>
                     <span className="font-medium">LinkedIn</span>
-                  </Link>
+                  </a>
                 </div>
               </div>
             </div>

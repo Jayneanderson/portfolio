@@ -214,7 +214,7 @@ export default function Home() {
                 Olá! Me chamo Jayneanderson e sou desenvolvedor full stack com
                 experiência em startups e empresas de tecnologia. Construo
                 microsserviços e monolitos robustos, além de interfaces que os
-                usuários realmente precisam.
+                usuários realmente precisam. Também utilizo IA com foco em entregas rápidas e de alto impacto.
               </motion.p>
 
               <motion.div
@@ -295,7 +295,7 @@ export default function Home() {
                 ambiente de startup, onde aprendi que
                 <strong className="text-foreground">
                   {" "}
-                  velocidade e qualidade não são opostos — são complementares.
+                  velocidade e qualidade não são opostos, mas complementares.
                 </strong>
               </p>
               <p>
@@ -308,9 +308,9 @@ export default function Home() {
               <p>
                 Hoje atuo como{" "}
                 <strong className="text-foreground text-primary">
-                  desenvolvedor pleno
+                  desenvolvedor full stack
                 </strong>{" "}
-                com foco em tranformar negócio em solução digital que escala e
+                com foco em transformar negócio em solução digital que escala e
                 resolve o problema certo.
               </p>
 
